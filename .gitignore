@@ -2,6 +2,7 @@
 .idea
 idea/
 .idea/
+.xml
 
 # ds-store
 .DS_Store
