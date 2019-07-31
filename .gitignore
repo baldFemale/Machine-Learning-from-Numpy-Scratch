@@ -1,0 +1,13 @@
+# idea
+.idea
+idea/
+.idea/
+
+# ds-store
+.DS_Store
+
+# dataset
+dataset/
+
+#py
+__pycache__/
