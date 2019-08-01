@@ -3,7 +3,6 @@ from sklearn import datasets
 from LinearDiscriminantAnalysis.LDA import LDA
 
 
-
 def main():
     iris = datasets.load_iris()
     X = iris.data
