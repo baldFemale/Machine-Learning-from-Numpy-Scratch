@@ -101,6 +101,7 @@ class DecisionTree:
     def predict_all(self, X, Y):
         temp = np.array([self.predict(sample) for sample in X])
         print(np.sum([temp[i]==Y[i] for i in range(len(temp))])/len(temp))
+        return temp
 
 
 
