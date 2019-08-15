@@ -2,6 +2,7 @@ import numpy as np
 import random
 import struct
 from Ensemble.Adaboost import Adaboost
+from Ensemble.RandomForest import RandomForest
 from sklearn import datasets
 
 
@@ -54,10 +55,14 @@ def main():
     train_X = train_X[index]
     train_Y = train_Y[index]
     train_Y[train_Y==0] = -1
-    train_index = [random.randint(0,train_X.shape[0]-1) for i in range(500)]
-    test_index = [random.randint(0,train_X.shape[0]-1) for i in range(500)]
-    clf = Adaboost()
-    clf.fit(train_X[train_index],train_Y[train_index],10,threshold=0.1)
+    train_index = [random.randint(0,train_X.shape[0]-1) for i in range(1000)]
+    test_index = [random.randint(0,train_X.shape[0]-1) for i in range(1000)]
+    # clf = Adaboost()
+    # clf.fit(train_X[train_index],train_Y[train_index],10,threshold=0.1)
+    # clf.predict(train_X[test_index],train_Y[test_index])
+
+    clf = RandomForest()
+    clf.fit(train_X[train_index],train_Y[train_index],100,10)
     clf.predict(train_X[test_index],train_Y[test_index])
     # iris = datasets.load_iris()
     # X = iris.data
