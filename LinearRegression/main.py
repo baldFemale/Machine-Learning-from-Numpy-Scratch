@@ -1,6 +1,10 @@
 import numpy as np
 import struct
 from LinearRegression.MultiLogitRegression import MultiLogitRegression
+from LinearRegression.LassoRegression import LassoRegression
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.preprocessing import MinMaxScaler
 
 
 def load_data():
@@ -51,12 +55,27 @@ def linearregression(train_X,train_Y,test_X,test_Y):
 
 
 def main():
-    train_X, train_Y, test_X, test_Y = load_data()
-    train_X = (1/255)*(train_X.reshape((train_X.shape[0],train_X.shape[1]*train_X.shape[2])))
-    train_Y = train_Y.reshape((train_Y.shape[0],1))
-    test_X = (1/255)*(test_X.reshape((test_X.shape[0],test_X.shape[1]*test_X.shape[2])))
-    test_Y = test_Y.reshape((test_Y.shape[0],1))
-    linearregression(train_X,train_Y,test_X,test_Y)
+    # train_X, train_Y, test_X, test_Y = load_data()
+    # train_X = (1/255)*(train_X.reshape((train_X.shape[0],train_X.shape[1]*train_X.shape[2])))
+    # train_Y = train_Y.reshape((train_Y.shape[0],1))
+    # test_X = (1/255)*(test_X.reshape((test_X.shape[0],test_X.shape[1]*test_X.shape[2])))
+    # test_Y = test_Y.reshape((test_Y.shape[0],1))
+    # linearregression(train_X,train_Y,test_X,test_Y)
+    boston = datasets.load_boston()
+    X = boston.data
+    # mm = MinMaxScaler()
+    # X = mm.fit_transform(X)
+    Y = boston.target
+    lasso = LassoRegression()
+    lasso.fit(X,Y,lambd=0.2,iteration=1000)
+    pre = lasso.predict(X)
+    figure = plt.figure()
+    plt.plot(Y,label="True Value")
+    plt.plot(pre,label="Predict Value")
+    plt.legend()
+    plt.show()
+
+
 
 
 if __name__ == '__main__':
